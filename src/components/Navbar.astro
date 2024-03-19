@@ -1,0 +1,40 @@
+---
+const { pathname } = Astro.url;
+
+const lists = [
+    {
+        name: "home",
+        pathUrl: "/",
+    },
+    {
+        name: "PokeDex",
+        pathUrl: "/pokedex",
+    },
+];
+
+const baseClass =
+    "hover:border-b-4 border-light-color_10 pb-4 transition-all font-bold";
+---
+
+<nav class="bg-light-color_30">
+    <div class="h-20 container flex justify-between items-center p-4">
+        <h1 class="text-2xl font-semibold">Poke</h1>
+        <ul class="flex gap-x-8 basis-4/5">
+            {
+                lists.map((list) => (
+                    <li class="capitalize">
+                        <a
+                            class:list={[
+                                baseClass,
+                                { "border-b-4": list.pathUrl === pathname },
+                            ]}
+                            href={list.pathUrl}
+                        >
+                            {list.name}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</nav>
